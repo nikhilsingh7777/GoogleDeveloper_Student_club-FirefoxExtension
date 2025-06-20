@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Input Box Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Custom Input Box</h1>
+    <label>
+      <input type="checkbox" id="extension-enabled"> Enable Extension
+    </label>
+    <h2>Mode</h2>
+    <label>
+      <input type="radio" name="mode" id="habit-mode" value="habit" checked> Habit Mode
+    </label>
+    <label>
+      <input type="radio" name="mode" id="advanced-mode" value="advanced"> Advanced Mode
+    </label>
+    <div id="advanced-settings" style="display: none;">
+      <h3>Advanced Mode Settings</h3>
+      <label>
+        LLM API Key:
+        <input type="text" id="api-key" placeholder="Enter your API key">
+      </label>
+      <button id="apply-css">Apply Custom CSS</button>
+      <button id="summarize-input">Summarize Input</button>
+    </div>
+    <p>Shortcuts: Toggle (Ctrl+Shift+I), Habit (Ctrl+Shift+N), Advanced (Ctrl+Shift+A)</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
