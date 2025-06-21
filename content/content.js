@@ -14,35 +14,46 @@ function toggleInputBox(show) {
     inputBox.id = 'custom-input-box';
     inputBox.innerHTML = `
       <style>
+        /* Gradient background with shining effect */
         #custom-input-box {
           position: fixed;
           top: 10px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 10000;
-          background: white;
-          border: 1px solid #ccc;
-          padding: 10px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          background: linear-gradient(135deg, #12c2e9, #c471ed, #f64f59);
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0 0 20px rgba(18, 194, 233, 0.7);
+          animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+          0% { box-shadow: 0 0 10px rgba(18, 194, 233, 0.7); }
+          50% { box-shadow: 0 0 30px rgba(196, 113, 237, 0.7); }
+          100% { box-shadow: 0 0 50px rgba(246, 79, 89, 0.7); }
         }
         #custom-input {
-          min-width: 200px;
-          max-width: 80vw;
-          min-height: 30px;
+          min-width: 600px;
+          max-width: 90vw;
+          min-height: 40px;
           max-height: 300px;
+          width: 100%; /* Ensure it fits within parent */
           resize: none;
           overflow-y: auto;
           font-family: Arial, sans-serif;
-          font-size: 14px;
-          padding: 5px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
+          font-size: 16px;
+          padding: 10px;
+          border: 2px solid #fff;
+          border-radius: 5px;
           box-sizing: border-box;
+          background: rgba(255, 255, 255, 0.9); /* Slight transparency for gradient visibility */
+          color: #333;
         }
         #mode-indicator {
-          margin-left: 10px;
-          font-size: 12px;
-          color: #555;
+          margin-left: 15px;
+          font-size: 14px;
+          color: #fff;
+          text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
         }
       </style>
       <textarea id="custom-input"></textarea>
@@ -52,18 +63,15 @@ function toggleInputBox(show) {
     const customInput = document.getElementById('custom-input');
     if (customInput) {
       console.log('Custom input created:', customInput);
-      // Auto-resize textarea based on content for both width and height
       const resizeTextarea = () => {
-        // Height adjustment
         customInput.style.height = 'auto';
         customInput.style.height = `${Math.min(customInput.scrollHeight, 300)}px`;
-        // Width adjustment using canvas to measure text width
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = '14px Arial, sans-serif';
-        const textWidth = context.measureText(customInput.value || ' ').width + 20; // Add padding
-        const minWidth = 200;
-        const maxWidth = Math.min(window.innerWidth * 0.8, 800); // 80vw or 800px max
+        context.font = '16px Arial, sans-serif';
+        const textWidth = context.measureText(customInput.value || ' ').width + 40;
+        const minWidth = 600;
+        const maxWidth = Math.min(window.innerWidth * 0.9, 900);
         customInput.style.width = `${Math.max(minWidth, Math.min(textWidth, maxWidth))}px`;
         console.log('Resized textarea: width=', customInput.style.width, 'height=', customInput.style.height);
       };
@@ -99,7 +107,6 @@ function toggleInputBox(show) {
       customInput.focus();
       customInput.value = currentInput ? (currentInput.textContent || currentInput.value || '') : '';
       console.log('Custom input focused, value set to:', customInput.value);
-      // Trigger initial resize
       resizeTextarea();
       if (!customInput.isConnected) {
         console.log('Warning: custom-input not connected to DOM, reattempting');
@@ -165,13 +172,12 @@ browser.runtime.onMessage.addListener((message) => {
         customInput.value = summary;
         customInput.style.height = 'auto';
         customInput.style.height = `${Math.min(customInput.scrollHeight, 300)}px`;
-        // Width adjustment for summary
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = '14px Arial, sans-serif';
-        const textWidth = context.measureText(summary || ' ').width + 20;
-        const minWidth = 200;
-        const maxWidth = Math.min(window.innerWidth * 0.8, 800);
+        context.font = '16px Arial, sans-serif';
+        const textWidth = context.measureText(summary || ' ').width + 40;
+        const minWidth = 600;
+        const maxWidth = Math.min(window.innerWidth * 0.9, 900);
         customInput.style.width = `${Math.max(minWidth, Math.min(textWidth, maxWidth))}px`;
       }
     }
@@ -198,24 +204,5 @@ document.addEventListener('focusin', (e) => {
       console.log('Showing input box in Habit Mode');
       toggleInputBox(true);
     }
-  }
-});
-
-document.addEventListener('focusout', (e) => {
-  console.log('Focusout event on element:', e.target);
-  if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) &&
-      !e.target.closest('#custom-input-box') && !focusLock) {
-    const relatedTarget = e.relatedTarget;
-    if (relatedTarget && (relatedTarget.id === 'custom-input' || relatedTarget.closest('#custom-input-box'))) {
-      console.log('Focusout ignored: Focus moved to custom input box');
-      return;
-    }
-    if (focusOutTimeout) {
-      clearTimeout(focusOutTimeout);
-    }
-    focusOutTimeout = setTimeout(() => {
-      console.log('Hiding input box after debounce');
-      toggleInputBox(false);
-    }, 300);
   }
 });
