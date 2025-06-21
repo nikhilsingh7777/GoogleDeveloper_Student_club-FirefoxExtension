@@ -206,3 +206,22 @@ document.addEventListener('focusin', (e) => {
     }
   }
 });
+
+document.addEventListener('focusout', (e) => {
+  console.log('Focusout event on element:', e.target);
+  if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) &&
+      !e.target.closest('#custom-input-box') && !focusLock) {
+    const relatedTarget = e.relatedTarget;
+    if (relatedTarget && (relatedTarget.id === 'custom-input' || relatedTarget.closest('#custom-input-box'))) {
+      console.log('Focusout ignored: Focus moved to custom input box');
+      return;
+    }
+    if (focusOutTimeout) {
+      clearTimeout(focusOutTimeout);
+    }
+    focusOutTimeout = setTimeout(() => {
+      console.log('Hiding input box after debounce');
+      toggleInputBox(false);
+    }, 300);
+  }
+});
