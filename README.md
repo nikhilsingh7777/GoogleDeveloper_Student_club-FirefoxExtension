@@ -86,24 +86,7 @@
 
 ## Project Structure
 
-Firefox_Extension/
-├── manifest.json           # Extension configuration (permissions, scripts, icons)
-├── popup/
-│   ├── popup.html         # Settings popup UI (toggle modes, enable/disable)
-│   ├── popup.css          # Styles for popup interface
-│   ├── popup.js           # Popup logic (mode switching, shortcut handling)
-├── content/
-│   ├── content.js         # Content script for injecting and syncing input box Habit Mode
-│   ├── content.css        # Styles for custom input box and overlay
-│   ├── advanced.js        # Advanced Mode logic (mock LLM summarization, CSS manipulation)
-├── background/
-│   ├── background.js      # Background script for keyboard shortcuts Ctrl+Shift+N.
-├── assets/
-│   ├── icon16.png         # 16x16 icon for manifest
-│   ├── icon48.png         # 48x48 icon for manifest
-│   ├── icon128.png        # 128x128 icon for store
-│  
-└── README.md              # Project documentation
+<pre> ```bash Firefox_Extension/ ├── manifest.json # Extension configuration (permissions, scripts, icons) ├── popup/ │ ├── popup.html # Settings popup UI (toggle modes, enable/disable) │ ├── popup.css # Styles for popup interface │ └── popup.js # Popup logic (mode switching, shortcut handling) ├── content/ │ ├── content.js # Content script for injecting and syncing input box (Habit Mode) │ ├── content.css # Styles for custom input box and overlay │ └── advanced.js # Advanced Mode logic (mock LLM summarization, CSS manipulation) ├── background/ │ └── background.js # Background script for keyboard shortcuts Ctrl+Shift+N ├── assets/ │ ├── icon16.png # 16x16 icon for manifest │ ├── icon48.png # 48x48 icon for manifest │ └── icon128.png # 128x128 icon for store └── README.md # Project documentation ``` </pre>
 ---
 
 ## Development Setup
