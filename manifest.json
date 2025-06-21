@@ -3,7 +3,12 @@
   "name": "Custom Input Box Everywhere",
   "version": "1.0",
   "description": "A Firefox extension to provide a custom input box at eye level with Habit and Advanced modes.",
-  "background": {
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting" ],
+    
+    "background": {
     "scripts": ["background/background.js"]
   },
   "content_scripts": [
