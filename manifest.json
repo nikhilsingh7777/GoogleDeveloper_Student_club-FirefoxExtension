@@ -7,7 +7,7 @@
     "activeTab",
     "storage",
     "scripting" ],
-    
+
     "background": {
     "scripts": ["background/background.js"]
   },
