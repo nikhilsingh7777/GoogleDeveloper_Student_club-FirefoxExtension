@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Custom Input Box Everywhere",
+  "version": "1.0",
+  "description": "A Firefox extension to provide a custom input box at eye level with Habit and Advanced modes.",
+  "background": {
+    "scripts": ["background/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "commands": {
+    "toggle-extension": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+I"
+      },
+      "description": "Toggle the extension on/off"
+    },
+    "toggle-habit-mode": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+N"
+      },
+      "description": "Toggle Habit Mode"
+    },
+    "toggle-advanced-mode": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Toggle Advanced Mode"
+    }
+  }
+}
