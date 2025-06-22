@@ -3,6 +3,7 @@
 
 ## Overview
 **Custom Input Box Everywhere** is a Firefox browser extension designed to revolutionize how you interact with text input fields on the web. Tired of scrolling to find input boxes stuck at the bottom of a page? This extension brings the input box to you—either as a header bar or a central popup—ensuring a focus-friendly typing experience. Built for the **GDSC Summer '25** project, this extension combines innovative UX design with powerful functionality, including two modes: **Habit Mode** for seamless input syncing and **Advanced Mode** for AI-powered CSS customization.
+This browser extension enhances typing UX by introducing a smart floating input box that syncs seamlessly with any focused field. It features two modes: Habit Mode for real-time synced typing, and Advanced Mode for applying AI-powered CSS customization or input summarization using an LLM API. The extension is fully controllable via keyboard shortcuts, making it fast, accessible, and distraction-free. Designed especially for platforms like Gmail where native input positions often disrupt user flow.
 
 ---
 ## Features
@@ -154,3 +155,4 @@ Contributions are welcome! To contribute:
 ## Contact
 For questions or feedback, reach out via:
 - Email:nikhilsinghhh11@gmail.com
+- Email:surbhi_t@es.iitr.ac.in
