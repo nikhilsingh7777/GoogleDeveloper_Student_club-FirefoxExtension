@@ -3,32 +3,80 @@
 <head>
   <style>
     body {
-      width: 300px;
-      height: 250px;
-      padding: 15px;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      width: 320px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #333;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    .section { margin-bottom: 15px; }
-    label { display: block; margin: 5px 0; }
-    input[type="text"], input[type="radio"] { margin-right: 10px; }
-    button { width: 100%; padding: 8px; margin-top: 10px; }
-    #apiKeyInput { width: 100%; padding: 5px; }
+
+    .section {
+      margin-bottom: 20px;
+      background: #f2f4f8;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    #apiKeyInput::placeholder {
+      color: #999;
+    }
   </style>
 </head>
 <body>
   <div class="section">
     <button id="toggle">Enable Extension</button>
   </div>
+
   <div class="section">
     <label><input type="radio" name="mode" value="off"> Off</label>
     <label><input type="radio" name="mode" value="habit"> Habit Mode (Sync Text)</label>
     <label><input type="radio" name="mode" value="advanced"> Advanced Mode (Process Commands)</label>
   </div>
+
   <div class="section">
-    <label for="apiKeyInput">API Key:</label>
-    <input type="text" id="apiKeyInput" placeholder="Enter your Gemini API Key">
+    <label for="apiKeyInput">Gemini API Key(For Advanced Mode Only):</label>
+    <input type="text" id="apiKeyInput" placeholder="Paste your API key here">
   </div>
+
   <script src="popup.js"></script>
 </body>
 </html>

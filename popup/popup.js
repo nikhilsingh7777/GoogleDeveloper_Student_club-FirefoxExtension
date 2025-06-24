@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
   apiKeyInput.addEventListener('change', () => {
     chrome.storage.local.set({ apiKey: apiKeyInput.value }, () => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
