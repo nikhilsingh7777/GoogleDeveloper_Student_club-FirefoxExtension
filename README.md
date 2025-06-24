@@ -89,15 +89,14 @@ This browser extension enhances typing UX by introducing a smart floating input 
 
 <pre> ```bash
 Firefox_Extension/ 
-├── manifest.json # Extension configuration (permissions, scripts, icons) 
+├── manifest.json # Extension configuration (permissions(Also permission realted to API must be added.), scripts, icons) 
 ├── popup/ 
    │── popup.html # Settings popup UI (toggle modes, enable/disable) 
-   ├── popup.css # Styles for popup interface 
    └── popup.js # Popup logic (mode switching, shortcut handling)
 ├── content/
-   ├── content.js # Content script for injecting and syncing input box (Habit Mode)
-   ├── content.css # Styles for custom input box and overlay 
-   └── advanced.js # Advanced Mode logic (mock LLM summarization, CSS manipulation) 
+   ├── handlerAll.js # Handles both advance and habit mode (For better function of extension include both mock LLM summarization, CSS manipulation and habit features.) 
+   ├── content.css # Styles for custom input box and overlay (styling for both advance and Habit mode).
+   └── config.js # Api key End point.
 ├── background/
    └── background.js # Background script for keyboard shortcuts Ctrl+Shift+N 
 ├── assets/ 
