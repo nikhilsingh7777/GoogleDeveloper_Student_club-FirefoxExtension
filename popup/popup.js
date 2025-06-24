@@ -1,50 +1,60 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
-  const enabledCheckbox = document.getElementById('extension-enabled');
-  const habitRadio = document.getElementById('habit-mode');
-  const advancedRadio = document.getElementById('advanced-mode');
-  const advancedSettings = document.getElementById('advanced-settings');
-  const apiKeyInput = document.getElementById('api-key');
-  const applyCssButton = document.getElementById('apply-css');
-  const summarizeButton = document.getElementById('summarize-input');
-  browser.storage.local.get(['enabled', 'mode', 'apiKey']).then((data) => {
-    enabledCheckbox.checked = data.enabled !== false;
-    habitRadio.checked = data.mode !== 'advanced';
-    advancedRadio.checked = data.mode === 'advanced';
-    apiKeyInput.value = data.apiKey || '';
-    advancedSettings.style.display = data.mode === 'advanced' ? 'block' : 'none';
+  const toggleBtn = document.getElementById('toggle');
+  const modeRadios = document.getElementsByName('mode');
+  const apiKeyInput = document.getElementById('apiKeyInput');
+
+  chrome.storage.local.get(['enabled', 'mode', 'apiKey'], (result) => {
+    toggleBtn.textContent = result.enabled ? 'Disable' : 'Enable';
+    modeRadios.forEach(radio => radio.checked = radio.value === result.mode);
+    apiKeyInput.value = result.apiKey || '';
   });
 
-  //some setting..
-  enabledCheckbox.addEventListener('change', () => {
-    browser.storage.local.set({ enabled: enabledCheckbox.checked });
-    browser.runtime.sendMessage({ action: 'toggleExtension', enabled: enabledCheckbox.checked });
+  toggleBtn.addEventListener('click', () => {
+    chrome.storage.local.get(['enabled', 'mode', 'apiKey'], (result) => {
+      const newEnabled = !result.enabled;
+      chrome.storage.local.set({ 
+        enabled: newEnabled, 
+        mode: result.mode || 'off', 
+        apiKey: result.apiKey || '' 
+      }, () => {
+        toggleBtn.textContent = newEnabled ? 'Disable' : 'Enable';
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          chrome.tabs.sendMessage(tabs[0].id, { 
+            action: 'updateState', 
+            state: { enabled: newEnabled, mode: result.mode || 'off', apiKey: result.apiKey || '' } 
+          });
+        });
+      });
+    });
   });
 
-  habitRadio.addEventListener('change', () => {
-    if (habitRadio.checked) {
-      browser.storage.local.set({ mode: 'habit' });
-      advancedSettings.style.display = 'none';
-      browser.runtime.sendMessage({ action: 'setMode', mode: 'habit' });
-    }
+  modeRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        chrome.storage.local.get(['enabled', 'apiKey'], (result) => {
+          chrome.storage.local.set({ mode: radio.value }, () => {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+              chrome.tabs.sendMessage(tabs[0].id, { 
+                action: 'updateState', 
+                state: { enabled: result.enabled || false, mode: radio.value, apiKey: result.apiKey || '' } 
+              });
+            });
+          });
+        });
+      }
+    });
   });
 
-  advancedRadio.addEventListener('change', () => {
-    if (advancedRadio.checked) {
-      browser.storage.local.set({ mode: 'advanced' });
-      advancedSettings.style.display = 'block';
-      browser.runtime.sendMessage({ action: 'setMode', mode: 'advanced' });
-    }
-  });
-
-  apiKeyInput.addEventListener('input', () => {
-    browser.storage.local.set({ apiKey: apiKeyInput.value });
-  });
-
-  applyCssButton.addEventListener('click', () => {
-    browser.runtime.sendMessage({ action: 'applyCustomCss', apiKey: apiKeyInput.value });
-  });
-
-  summarizeButton.addEventListener('click', () => {
-    browser.runtime.sendMessage({ action: 'summarizeInput', apiKey: apiKeyInput.value });
+  apiKeyInput.addEventListener('change', () => {
+    chrome.storage.local.set({ apiKey: apiKeyInput.value }, () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { 
+          action: 'updateState', 
+          state: { apiKey: apiKeyInput.value } 
+        });
+      });
+    });
   });
 });
