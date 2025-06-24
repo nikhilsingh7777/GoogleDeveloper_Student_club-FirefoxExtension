@@ -1,5 +1,6 @@
 console.log('Background: Script loaded');
 
+
 browser.commands.onCommand.addListener((command) => {
   console.log('Background: Command received:', command);
   browser.storage.local.get(['enabled', 'mode']).then((data) => {
@@ -42,6 +43,7 @@ browser.commands.onCommand.addListener((command) => {
     }
   });
 });
+
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('Background: Message received:', message, 'from:', sender.tab ? sender.tab.url : 'unknown');
