@@ -2,18 +2,24 @@
   "manifest_version": 2,
   "name": "Custom Input Box Extension",
   "version": "1.0",
-  "description": "A Firefox extension to add a custom input box with Habit and Advanced modes using Gemini API.",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
+  "description": "Firefox extension with Habit and Advanced input box modes.",
+  "permissions": ["storage", "activeTab",  "https://generativelanguage.googleapis.com/"
+],
+  "background": {
+    "scripts": ["background.js"]
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content/modeHandler.js"],
+      "js": ["content/config.js", "content/handlerAll.js"],
       "css": ["content/content.css"],
       "run_at": "document_end"
     }
+  ],
+  "web_accessible_resources": [
+    "content/*.js",
+    "content/*.css",
+    "assets/*"
   ],
   "browser_action": {
     "default_popup": "popup/popup.html",
@@ -27,9 +33,5 @@
     "16": "assets/icon16.png",
     "48": "assets/icon48.png",
     "128": "assets/icon128.png"
-  },
-  "web_accessible_resources": [
-    "assets/*",
-    "content/*.css"
-  ]
+  }
 }
