@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Input Box Settings</title>
-  <link rel="stylesheet" href="popup.css">
+  <style>
+    body {
+      width: 300px;
+      height: 250px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+    .section { margin-bottom: 15px; }
+    label { display: block; margin: 5px 0; }
+    input[type="text"], input[type="radio"] { margin-right: 10px; }
+    button { width: 100%; padding: 8px; margin-top: 10px; }
+    #apiKeyInput { width: 100%; padding: 5px; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Custom Input Box</h1>
-    <label>
-      <input type="checkbox" id="extension-enabled"> Enable Extension
-    </label>
-    <h2>Mode</h2>
-    <label>
-      <input type="radio" name="mode" id="habit-mode" value="habit" checked> Habit Mode
-    </label>
-    <label>
-      <input type="radio" name="mode" id="advanced-mode" value="advanced"> Advanced Mode
-    </label>
-    <div id="advanced-settings" style="display: none;">
-      <h3>Advanced Mode Settings</h3>
-      <label>
-        LLM API Key:
-        <input type="text" id="api-key" placeholder="Enter your API key">
-      </label>
-      <button id="apply-css">Apply Custom CSS</button>
-      <button id="summarize-input">Summarize Input</button>
-    </div>
-    <p>Shortcuts: Toggle (Ctrl+Shift+I), Habit (Ctrl+Shift+N), Advanced (Ctrl+Shift+A)</p>
+  <div class="section">
+    <button id="toggle">Enable Extension</button>
+  </div>
+  <div class="section">
+    <label><input type="radio" name="mode" value="off"> Off</label>
+    <label><input type="radio" name="mode" value="habit"> Habit Mode (Sync Text)</label>
+    <label><input type="radio" name="mode" value="advanced"> Advanced Mode (Process Commands)</label>
+  </div>
+  <div class="section">
+    <label for="apiKeyInput">API Key:</label>
+    <input type="text" id="apiKeyInput" placeholder="Enter your Gemini API Key">
   </div>
   <script src="popup.js"></script>
 </body>
