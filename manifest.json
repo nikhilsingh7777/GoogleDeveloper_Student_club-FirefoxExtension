@@ -1,24 +1,21 @@
 {
-  "manifest_version": 3,
-  "name": "Custom Input Box Everywhere",
+  "manifest_version": 2,
+  "name": "Custom Input Box Extension",
   "version": "1.0",
-  "description": "A Firefox extension to provide a custom input box at eye level with Habit and Advanced modes.",
+  "description": "A Firefox extension to add a custom input box with Habit and Advanced modes using Gemini API.",
   "permissions": [
     "activeTab",
-    "storage",
-    "scripting" ],
-
-    "background": {
-    "scripts": ["background/background.js"]
-  },
+    "storage"
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content/content.js"],
-      "css": ["content/content.css"]
+      "js": ["content/modeHandler.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_end"
     }
   ],
-  "action": {
+  "browser_action": {
     "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "assets/icon16.png",
@@ -26,24 +23,13 @@
       "128": "assets/icon128.png"
     }
   },
-  "commands": {
-    "toggle-extension": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+I"
-      },
-      "description": "Toggle the extension on/off"
-    },
-    "toggle-habit-mode": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+N"
-      },
-      "description": "Toggle Habit Mode"
-    },
-    "toggle-advanced-mode": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+A"
-      },
-      "description": "Toggle Advanced Mode"
-    }
-  }
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "web_accessible_resources": [
+    "assets/*",
+    "content/*.css"
+  ]
 }
