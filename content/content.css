@@ -1,39 +1,66 @@
- /* #custom-input-box {
-          position: fixed;
-          top: 10px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 10000;
-          background: linear-gradient(135deg, #12c2e9, #c471ed, #f64f59);
-          padding: 15px;
-          border-radius: 10px;
-          box-shadow: 0 0 20px rgba(18, 194, 233, 0.7);
-          animation: glow 2s infinite alternate;
-        }
-        @keyframes glow {
-          0% { box-shadow: 0 0 10px rgba(18, 194, 233, 0.7); }
-          50% { box-shadow: 0 0 30px rgba(196, 113, 237, 0.7); }
-          100% { box-shadow: 0 0 50px rgba(246, 79, 89, 0.7); }
-        }
-        #custom-input {
-          min-width: 600px;
-          max-width: 90vw;
-          min-height: 40px;
-          max-height: 300px;
-          width: 100%; /* Ensure it fits within parent */
-          /* resize: none;
-          overflow-y: auto;
-          font-family: Arial, sans-serif;
-          font-size: 16px;
-          padding: 10px;
-          border: 2px solid #fff;
-          border-radius: 5px;
-          box-sizing: border-box;
-          background: rgba(255, 255, 255, 0.9); /* Slight transparency for gradient visibility */
-          /* color: #333; */
-        /* #mode-indicator {
-          margin-left: 15px;
-          font-size: 14px;
-          color: #fff;
-          text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
-        }  */
+/* Blur only background, not the input box */
+.custom-input-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  /* backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.05);  */
+  backdrop-filter: blur(1px);
+background: rgba(0, 0, 0, 0.01);
+  z-index: 999;
+}
+
+
+/* Input box */
+#custom-input-box {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 15px;
+  border: 2px solid #0078d4;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* above blur */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* Close button */
+#custom-close-btn {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  font-size: 22px;
+  border: none;
+  background: none;
+  color: #000000;
+  cursor: pointer;
+}
+#custom-close-btn:hover {
+  color: #e00;
+}
+
+
+/* Text area */
+#custom-input {
+  width: 500px;
+  min-height: 50px;
+  font-size: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Mode label */
+#mode-indicator {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: #0078d4;
+}
