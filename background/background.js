@@ -1,13 +1,9 @@
 console.log('Background: Script loaded');
-
-
 chrome.commands.onCommand.addListener((command) => {
   console.log('Background: Command received:', command);
   chrome.storage.local.get(['enabled', 'mode'], (data) => {
     const isEnabled = data.enabled ?? false;
     const currentMode = data.mode || 'off';
-
-
     if (command === 'toggle-extension') {
       const newEnabled = !isEnabled;
       chrome.storage.local.set({ enabled: newEnabled });
@@ -21,8 +17,6 @@ chrome.commands.onCommand.addListener((command) => {
     }
   });
 });
-
-
 function sendToActiveTab(message) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0]) {

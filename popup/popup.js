@@ -1,16 +1,12 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('toggle');
   const modeRadios = document.getElementsByName('mode');
   const apiKeyInput = document.getElementById('apiKeyInput');
-
   chrome.storage.local.get(['enabled', 'mode', 'apiKey'], (result) => {
     toggleBtn.textContent = result.enabled ? 'Disable' : 'Enable';
     modeRadios.forEach(radio => radio.checked = radio.value === result.mode);
     apiKeyInput.value = result.apiKey || '';
   });
-
   toggleBtn.addEventListener('click', () => {
     chrome.storage.local.get(['enabled', 'mode', 'apiKey'], (result) => {
       const newEnabled = !result.enabled;
