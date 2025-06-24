@@ -1,6 +1,5 @@
 # Custom Input Box Firefox Extension 🎉
 *Bring your input box where you want it—smart, synced, and seamless.*
-
 ## Overview
 **Custom Input Box Everywhere** is a Firefox browser extension designed to revolutionize how you interact with text input fields on the web. Tired of scrolling to find input boxes stuck at the bottom of a page? This extension brings the input box to you—either as a header bar or a central popup—ensuring a focus-friendly typing experience. Built for the **GDSC Summer '25** project, this extension combines innovative UX design with powerful functionality, including two modes: **Habit Mode** for seamless input syncing and **Advanced Mode** for AI-powered CSS customization.
 This browser extension enhances typing UX by introducing a smart floating input box that syncs seamlessly with any focused field. It features two modes: Habit Mode for real-time synced typing, and Advanced Mode for applying AI-powered CSS customization or input summarization using an LLM API. The extension is fully controllable via keyboard shortcuts, making it fast, accessible, and distraction-free. Designed especially for platforms like Gmail where native input positions often disrupt user flow.
@@ -85,6 +84,32 @@ This browser extension enhances typing UX by introducing a smart floating input 
    - Accepts LLM prompt commands (like css: or text).
    - Dynamically modifies webpage CSS or summarizes content using Gemini API.
    - Fully async with support for enter-based execution
+  
+## Using Advanced Mode (Prompt Guide)
+
+a. **Get an API Key**  
+   - Generate a Gemini API key/or any API Key from [Google AI Studio](https://makersuite.google.com/app/apikey).
+   - Open the extension popup and paste the key to enable Advanced Mode.
+
+b. **Summarize Long Content**  
+   - Prompt format:
+     ```
+     summarize Your long text here...
+     ```
+
+c. **Modify Website Styles with CSS**  
+   - Prompt format:
+     ```
+     css: make all paragraphs blue and center aligned
+     ```
+
+d. **Enter and Submit Prompt**  
+   - Type your prompt in the input box and press `Enter`.
+   - Summaries are shown via alert. CSS changes are applied instantly.
+
+e. **Tips for Better Results**  
+   - Be specific and simple.
+   - Avoid ambiguous styling or excessive verbosity
 
 4. **Customization**:
    - Adjust popup position (top/center) and styling in the settings.
