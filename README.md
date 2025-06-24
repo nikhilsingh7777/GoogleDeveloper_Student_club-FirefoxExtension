@@ -72,12 +72,19 @@ This browser extension enhances typing UX by introducing a smart floating input 
 2. **Habit Mode**:
    - Focus on any input field, and a header bar or central popup will appear.
    - Type in the popup, and your input will sync instantly with the original field.
+   - Auto-float input box appears on field focus.
+   - Instantly syncs typed text with focused field (textarea, input, or contenteditable).
+   - Custom placement: top bar or center modal.
+
 
 3. **Advanced Mode**:
    - Configure your LLM API key in the extension settings.
    - Enable Advanced Mode via the shortcut (`Ctrl+Shift+A` or customizable).
    - The extension will analyze the website's CSS and suggest modifications for a better input experience.
    - Use the summarization feature to condense long input fields.
+   - Accepts LLM prompt commands (like css: or text).
+   - Dynamically modifies webpage CSS or summarizes content using Gemini API.
+   - Fully async with support for enter-based execution
 
 4. **Customization**:
    - Adjust popup position (top/center) and styling in the settings.
